@@ -4,7 +4,8 @@ import {
   faTimes,
   faBell,
   faCogs,
-  faImage
+  faImage,
+  faCaretRight
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faMinus, faTimes, faBell, faCogs, faImage)
+library.add(faMinus, faTimes, faBell, faCogs, faImage, faCaretRight)

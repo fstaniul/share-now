@@ -1,5 +1,4 @@
-@import "./fonts.css";
-@import "./default.css";
+@import "./fonts";
 
 /**
  * This injects Tailwind's base styles, which is a combination of
@@ -63,3 +62,5 @@
   * @import "utilities/background-patterns";
   * @import "utilities/skew-transforms";
   */
+
+@import "./default";

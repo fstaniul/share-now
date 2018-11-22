@@ -7,3 +7,10 @@ body {
   -webkit-user-select: none;
   cursor: default;
 }
+
+button {
+  outline: none;
+  &:focus {
+    outline: none;
+  }
+}
