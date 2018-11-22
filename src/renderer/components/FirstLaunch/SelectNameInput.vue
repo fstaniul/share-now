@@ -21,7 +21,6 @@
     methods: {
       input (event) {
         this.$emit('input', event.target.value)
-        this.value = event.target.value
       }
     }
   }
