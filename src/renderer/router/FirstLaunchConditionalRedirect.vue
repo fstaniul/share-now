@@ -9,10 +9,10 @@
     mounted () {
       console.log('first launch conditional redirect')
       if (this.$store.state.launch.firstLaunch) {
-        this.$router.push('first-launch-name')
+        this.$router.push({name: 'first-launch-name'})
         console.log('Redirecting!')
       } else {
-        this.$router.push('dashboard')
+        this.$router.push({name: 'dashboard'})
       }
     }
   }
