@@ -1,4 +1,4 @@
 import Vue from 'vue'
 
-Vue.component('logo', require('@/components/Utility/Logo'))
-Vue.component('fa-icon', require('@fortawesome/vue-fontawesome'))
+Vue.component('logo', require('@/components/Utility/Logo').default)
+Vue.component('fa-icon', require('@fortawesome/vue-fontawesome').default)
