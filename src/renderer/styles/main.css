@@ -10,7 +10,7 @@
  *
  * If using `postcss-import`, use this import instead:
  *
- * @import "tailwindcss/preflight";
+ *
  */
 @tailwind preflight;
 
