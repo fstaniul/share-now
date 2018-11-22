@@ -6,13 +6,25 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'landing-page',
-      component: require('@/components/LandingPage').default
+      path: '/first-launch',
+      name: 'first-launch',
+      component: require('@/components/FirstLaunch').default,
+      children: [
+        {
+          path: '/select-name',
+          name: 'first-launch-name',
+          component: require('@/components/FirstLaunch/SelectName')
+        },
+        {
+          path: '/select-image',
+          name: 'first-launch-image',
+          component: require('@/components/FirstLaunch/SelectImage')
+        }
+      ]
     },
     {
       path: '*',
-      redirect: '/'
+      redirect: '/first-launch/select-image'
     }
   ]
 })
