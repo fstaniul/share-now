@@ -1,7 +1,13 @@
 .btn-blue {
   @apply bg-blue text-white px-8 py-4 rounded-full;
-  &:hover {
-    @apply bg-blue-darker;
+  &:not(.disabled) {
+    &:hover {
+      @apply bg-blue-darker;
+    }
   }
   transition: 0.2s background;
+  &.disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+  }
 }

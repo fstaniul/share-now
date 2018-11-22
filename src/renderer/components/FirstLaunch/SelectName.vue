@@ -5,8 +5,8 @@
       <div>Share your files on local network <span class="font-bold">fast</span> and <span class="font-bold">easy</span>!</div>
       <name-input v-model="name" />
       <div class="text-right">
-        <button type="button" class="btn-blue">
-          START
+        <button type="button" class="btn-blue" @click="next()" :class="{'disabled': !nameSet}">
+          CONTINUE
           <fa-icon icon="caret-right"></fa-icon>
         </button>
       </div>
@@ -22,6 +22,19 @@
     data () {
       return {
         name: ''
+      }
+    },
+    computed: {
+      nameSet () {
+        return this.name
+      }
+    },
+    methods: {
+      next () {
+        if (this.name) {
+          this.$store.dispatch('set-name', this.name)
+          this.$router.push({name: 'first-launch-image'})
+        }
       }
     }
   }
