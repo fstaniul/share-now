@@ -28,7 +28,7 @@
 
 <style lang="scss" scoped>
 input {
-  @apply text-2xl text-center w-full h-16 bg-transparent border-gray-light border rounded-full;
+  @apply text-2xl text-center w-full h-16 bg-transparent border-gray border rounded-full;
   &:focus {
     outline: none;
     @apply border-blue;

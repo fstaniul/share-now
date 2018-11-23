@@ -3,9 +3,10 @@ import {
   faMinus,
   faTimes,
   faBell,
-  faCogs,
+  faCog,
   faImage,
-  faCaretRight
+  faCaretRight,
+  faPlus
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faMinus, faTimes, faBell, faCogs, faImage, faCaretRight)
+library.add(faMinus, faTimes, faBell, faCog, faImage, faCaretRight, faPlus)

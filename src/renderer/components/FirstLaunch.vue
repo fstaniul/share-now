@@ -19,7 +19,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .tr-anim-enter,
 .tr-anim-enter-to,
 .tr-anim-leave,

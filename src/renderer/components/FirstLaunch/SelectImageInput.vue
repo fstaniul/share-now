@@ -1,5 +1,5 @@
 <template>
-    <div class="container rounded-full border border-gray-light bg-transparent relative flex justify-center items-center flex-col cursor-pointer" @click="selectFile" :style="containerStyles">
+    <div class="container rounded-full border border-gray bg-transparent relative flex justify-center items-center flex-col cursor-pointer" @click="selectFile" :style="containerStyles">
         <template v-if="!value">
             <div class="image-icon-contianer"><fa-icon icon="image"></fa-icon></div>
             <span class="pb-3">SELECT PICTURE</span>
