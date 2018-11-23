@@ -1,8 +1,6 @@
 <template>
-  <div class="flex items-center justify-center h-screen w-full">
-      <div class="select-image-contianer">
-          <logo class="text-5xl" />
-          <div>Share your files on local network <span class="font-bold">fast</span> and <span class="font-bold">easy</span>!</div>
+  <div class="flex items-center justify-center h-full w-full">
+      <div class="select-image-container">
           <div class="flex justify-center">
             <select-image-input class="mt-8 mb-4" v-model="image" />
           </div>

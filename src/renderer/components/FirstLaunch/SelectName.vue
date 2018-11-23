@@ -1,8 +1,6 @@
 <template>
-  <div class="flex flex-row justify-center items-center h-screen w-full">
+  <div class="flex flex-row justify-center items-center h-full w-full">
     <div class="form-container">
-      <logo class="text-5xl" />
-      <div>Share your files on local network <span class="font-bold">fast</span> and <span class="font-bold">easy</span>!</div>
       <name-input v-model="name" />
       <div class="text-right">
         <button type="button" class="btn-blue" @click="next()" :class="{'disabled': !nameSet}">
