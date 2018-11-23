@@ -3,7 +3,7 @@
     <div class="form-container">
       <name-input v-model="name" />
       <div class="text-right">
-        <button type="button" class="btn-blue" @click="next()" :class="{'disabled': !nameSet}">
+        <button type="button" class="btn-blue" @click="next()" :class="{'disabled': !name}">
           CONTINUE
           <fa-icon icon="caret-right"></fa-icon>
         </button>
@@ -20,11 +20,6 @@
     data () {
       return {
         name: ''
-      }
-    },
-    computed: {
-      nameSet () {
-        return this.name
       }
     },
     methods: {
