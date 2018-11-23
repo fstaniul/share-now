@@ -1,6 +1,6 @@
 body {
   background: linear-gradient(to bottom right, #fff, #ececec);
-  font-family: "Montserrat";
+  font-family: 'Montserrat';
   width: 100vw;
   height: 100vh;
   font-size: 16px;
@@ -13,4 +13,9 @@ button {
   &:focus {
     outline: none;
   }
+}
+
+.top-left-0 {
+  top: 0;
+  left: 0;
 }

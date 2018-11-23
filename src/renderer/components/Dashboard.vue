@@ -11,6 +11,9 @@
                 </button>
             </nav>
         </div>
+        <div class="profiles-container">
+          <profile v-for="profile of usersOnline" :profile="profile" :key="profile.id"></profile>
+        </div>
         <task-bar />
     </div>
 </template>
@@ -18,12 +21,22 @@
 <script>
 export default {
   components: {
-    'task-bar': require('./Dashboard/TaskBar').default
+    'task-bar': require('./Dashboard/TaskBar').default,
+    profile: require('./Dashboard/Profile').default
+  },
+  computed: {
+    usersOnline () {
+      return this.$store.state.users.online
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.profiles.container {
+  padding: 20px 40px 0 40px;
+}
+
 .header-container {
   padding-top: 40px;
   padding-left: 40px;
