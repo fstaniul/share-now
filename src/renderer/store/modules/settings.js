@@ -1,7 +1,8 @@
 export default {
     state: {
         name: '',
-        image: ''
+        image: '',
+        firstStart: true
     },
     mutations: {
         'set-image' (state, payload) {
@@ -9,6 +10,9 @@ export default {
         },
         'set-name' (state, payload) {
             state.name = payload
+        },
+        'set-first-start' (state, payload) {
+            state.firstStart = payload
         }
     },
     actions: {
@@ -17,6 +21,9 @@ export default {
         },
         'set-name' (ctx, payload) {
             ctx.commit('set-name', payload)
+        },
+        'mark-first-started' (ctx) {
+            ctx.commit('set-first-start', false)
         }
     }
 }

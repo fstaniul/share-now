@@ -26,7 +26,7 @@
       },
       methods: {
           start () {
-              this.$store.dispatch('finishFirstLaunch')
+              this.$store.dispatch('mark-first-started')
               if (this.image) {
                   this.$store.dispatch('set-image', this.image)
               }

@@ -12,10 +12,10 @@
 <script>
 export default {
     methods: {
-        close() {
+        close () {
             this.$electron.remote.getCurrentWindow().close()
         },
-        minimize() {
+        minimize () {
             this.$electron.remote.getCurrentWindow().minimize()
         }
     }
@@ -24,23 +24,23 @@ export default {
 
 <style lang="scss" scoped>
 .app-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 20px;
-    -webkit-user-select: none;
-    -webkit-app-region: drag;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 20px;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
 }
 
 .app-bar-btn {
-    @apply rounded-full cursor-pointer text-white;
-    width: 16px;
-    height: 16px;
-    font-size: 8px;
-    &:focus {
-        outline: none;
-    }
-    -webkit-app-region: no-drag;
+  @apply rounded-full cursor-pointer text-white;
+  width: 16px;
+  height: 16px;
+  font-size: 8px;
+  &:focus {
+    outline: none;
+  }
+  -webkit-app-region: no-drag;
 }
 </style>
