@@ -28,7 +28,7 @@ export default {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 20px;
+  height: 30px;
   -webkit-user-select: none;
   -webkit-app-region: drag;
 }
