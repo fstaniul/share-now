@@ -10,37 +10,37 @@
 </template>
 
 <script>
-  export default {
+export default {
     methods: {
-      close () {
-        this.$electron.remote.getCurrentWindow().close()
-      },
-      minimize () {
-        this.$electron.remote.getCurrentWindow().minimize()
-      }
+        close() {
+            this.$electron.remote.getCurrentWindow().close()
+        },
+        minimize() {
+            this.$electron.remote.getCurrentWindow().minimize()
+        }
     }
-  }
+}
 </script>
 
 <style lang="scss" scoped>
 .app-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 20px;
-  -webkit-user-select: none;
-  -webkit-app-region: drag;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 20px;
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
 }
 
 .app-bar-btn {
-  @apply rounded-full cursor-pointer text-white;
-  width: 16px;
-  height: 16px;
-  font-size: 8px;
-  &:focus {
-    outline: none;
-  }
-  -webkit-app-region: no-drag;
+    @apply rounded-full cursor-pointer text-white;
+    width: 16px;
+    height: 16px;
+    font-size: 8px;
+    &:focus {
+        outline: none;
+    }
+    -webkit-app-region: no-drag;
 }
 </style>

@@ -7,22 +7,22 @@
 
 <script>
   export default {
-    props: {
-      'value': {
-        default: '',
-        type: String
+      props: {
+          'value': {
+              default: '',
+              type: String
+          }
+      },
+      computed: {
+          notEmpty () {
+              return this.value
+          }
+      },
+      methods: {
+          input (event) {
+              this.$emit('input', event.target.value)
+          }
       }
-    },
-    computed: {
-      notEmpty () {
-        return this.value
-      }
-    },
-    methods: {
-      input (event) {
-        this.$emit('input', event.target.value)
-      }
-    }
   }
 </script>
 

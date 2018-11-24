@@ -13,30 +13,30 @@
 
 <script>
 export default {
-  props: {
-    profile: {
-      default: () => ({}),
-      type: Object
-    }
-  },
-  computed: {
-    imageStyle () {
-      return {
-        'background-image': `url(${this.profile.image})`,
-        'background-size': 'cover',
-        'background-position': 'center',
-        'background-repeat': 'no-repeat'
-      }
+    props: {
+        profile: {
+            default: () => ({}),
+            type: Object
+        }
     },
-    progress () {
-      return 35
+    computed: {
+        imageStyle () {
+            return {
+                'background-image': `url(${this.profile.image})`,
+                'background-size': 'cover',
+                'background-position': 'center',
+                'background-repeat': 'no-repeat'
+            }
+        },
+        progress () {
+            return 35
+        }
+    },
+    methods: {
+        click () {
+            this.$router.push({name: 'file-share', query: {id: this.profile.id}})
+        }
     }
-  },
-  methods: {
-    click () {
-      this.$router.push({name: 'file-share', query: {id: this.profile.id}})
-    }
-  }
 }
 </script>
 

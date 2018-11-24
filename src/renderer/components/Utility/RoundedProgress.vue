@@ -14,50 +14,50 @@
 
 <script>
   export default {
-    props: {
-      size: {
-        type: Number,
-        default: 150
+      props: {
+          size: {
+              type: Number,
+              default: 150
+          },
+          progress: {
+              type: Number,
+              default: 0
+          }
       },
-      progress: {
-        type: Number,
-        default: 0
+      computed: {
+          progressClass () {
+              return `progress-${this.progress}`
+          },
+          styles () {
+              return {
+                  'width': this.size + 'px',
+                  'height': this.size + 'px'
+              }
+          },
+          maskStyles () {
+              return {
+                  'clip': `rect(0 ${this.size}px ${this.size}px ${this.size / 2}px)`
+              }
+          },
+          barStyles () {
+              return {
+                  'transform': `rotate(${Math.round(this.progress * 180 / 100)}deg)`,
+                  'clip': `rect(0, ${this.size / 2}px, ${this.size}px, 0)`
+              }
+          },
+          overMaskStyles () {
+              return {
+                  'transform': `rotate(${Math.round(this.progress * 180 / 100)}deg)`,
+                  'clip': `rect(0 ${this.size}px ${this.size}px ${this.size / 2}px)`
+              }
+          },
+          maskFixStyles () {
+              return {
+                  'transform': `rotate(${Math.round(this.progress * 90 / 100)}deg)`,
+                  'clip': `rect(0 ${this.size}px ${this.size}px ${this.size / 2}px)`
+              }
+          }
       }
-    },
-    computed: {
-      progressClass () {
-        return `progress-${this.progress}`
-      },
-      styles () {
-        return {
-          'width': this.size + 'px',
-          'height': this.size + 'px'
-        }
-      },
-      maskStyles () {
-        return {
-          'clip': `rect(0 ${this.size}px ${this.size}px ${this.size / 2}px)`
-        }
-      },
-      barStyles () {
-        return {
-          'transform': `rotate(${Math.round(this.progress * 180 / 100)}deg)`,
-          'clip': `rect(0, ${this.size / 2}px, ${this.size}px, 0)`
-        }
-      },
-      overMaskStyles () {
-        return {
-          'transform': `rotate(${Math.round(this.progress * 180 / 100)}deg)`,
-          'clip': `rect(0 ${this.size}px ${this.size}px ${this.size / 2}px)`
-        }
-      },
-      maskFixStyles () {
-        return {
-          'transform': `rotate(${Math.round(this.progress * 90 / 100)}deg)`,
-          'clip': `rect(0 ${this.size}px ${this.size}px ${this.size / 2}px)`
-        }
-      }
-    }
   }
 </script>
 

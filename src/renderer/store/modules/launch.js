@@ -1,15 +1,15 @@
 export default {
-  state: {
-    firstLaunch: true
-  },
-  mutations: {
-    finishFirstLaunch (store) {
-      store.firstLaunch = false
+    state: {
+        firstLaunch: true
+    },
+    mutations: {
+        finishFirstLaunch (store) {
+            store.firstLaunch = false
+        }
+    },
+    actions: {
+        finishFirstLaunch (ctx) {
+            ctx.commit('finishFirstLaunch')
+        }
     }
-  },
-  actions: {
-    finishFirstLaunch (ctx) {
-      ctx.commit('finishFirstLaunch')
-    }
-  }
 }

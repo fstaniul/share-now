@@ -11,16 +11,16 @@
 
 <script>
 export default {
-  data () {
-    return {
-      closed: false
+    data () {
+        return {
+            closed: false
+        }
+    },
+    computed: {
+        btnIcon () {
+            return this.closed ? 'plus' : 'minus'
+        }
     }
-  },
-  computed: {
-    btnIcon () {
-      return this.closed ? 'plus' : 'minus'
-    }
-  }
 }
 </script>
 

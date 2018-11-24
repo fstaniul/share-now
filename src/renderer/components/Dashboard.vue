@@ -20,15 +20,15 @@
 
 <script>
 export default {
-  components: {
-    'task-bar': require('./Dashboard/TaskBar').default,
-    profile: require('./Dashboard/Profile').default
-  },
-  computed: {
-    usersOnline () {
-      return this.$store.state.users.online
+    components: {
+        'task-bar': require('./Dashboard/TaskBar').default,
+        profile: require('./Dashboard/Profile').default
+    },
+    computed: {
+        usersOnline () {
+            return this.$store.state.users.online
+        }
     }
-  }
 }
 </script>
 

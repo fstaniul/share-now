@@ -7,10 +7,10 @@
 
 <script>
   export default {
-    name: 'share-now',
-    components: {
-      'app-bar': require('@/components/AppBar').default
-    }
+      name: 'share-now',
+      components: {
+          'app-bar': require('@/components/AppBar').default
+      }
   }
 </script>
 

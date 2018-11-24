@@ -14,22 +14,22 @@
 
 <script>
   export default {
-    components: {
-      'name-input': require('./SelectNameInput').default
-    },
-    data () {
-      return {
-        name: ''
+      components: {
+          'name-input': require('./SelectNameInput').default
+      },
+      data () {
+          return {
+              name: ''
+          }
+      },
+      methods: {
+          next () {
+              if (this.name) {
+                  this.$store.dispatch('set-name', this.name)
+                  this.$router.push({name: 'first-launch-image'})
+              }
+          }
       }
-    },
-    methods: {
-      next () {
-        if (this.name) {
-          this.$store.dispatch('set-name', this.name)
-          this.$router.push({name: 'first-launch-image'})
-        }
-      }
-    }
   }
 </script>
 

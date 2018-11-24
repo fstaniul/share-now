@@ -16,23 +16,23 @@
 
 <script>
   export default {
-    components: {
-      'select-image-input': require('./SelectImageInput').default
-    },
-    data () {
-      return {
-        image: ''
+      components: {
+          'select-image-input': require('./SelectImageInput').default
+      },
+      data () {
+          return {
+              image: ''
+          }
+      },
+      methods: {
+          start () {
+              this.$store.dispatch('finishFirstLaunch')
+              if (this.image) {
+                  this.$store.dispatch('set-image', this.image)
+              }
+              this.$router.push({name: 'dashboard'})
+          }
       }
-    },
-    methods: {
-      start () {
-        this.$store.dispatch('finishFirstLaunch')
-        if (this.image) {
-          this.$store.dispatch('set-image', this.image)
-        }
-        this.$router.push({name: 'dashboard'})
-      }
-    }
   }
 </script>
 
