@@ -1,7 +1,7 @@
 'use strict'
 
 import { app, BrowserWindow } from 'electron'
-import '../renderer/store'
+import './store'
 
 /**
  * Set `__static` path to static files in production
@@ -45,6 +45,7 @@ app.on('ready', createWindow)
 app.on('window-all-closed', () => {
     app.quit()
 })
+
 /**
  * Auto Updater
  *
