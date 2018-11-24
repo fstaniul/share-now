@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Filip \"vip1all\" Staniul <vip.all@hotmail.com>",
   "description": "Cross platform app that makes sharing files on local network fast and easy.",
-  "license": null,
+  "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",
@@ -60,6 +60,9 @@
     "@fortawesome/free-solid-svg-icons": "^5.5.0",
     "@fortawesome/vue-fontawesome": "^0.1.2",
     "axios": "^0.18.0",
+    "device-discovery": "^0.3.1",
+    "express": "^4.16.4",
+    "multer": "^1.4.1",
     "vue": "^2.5.16",
     "vue-electron": "^1.0.6",
     "vue-router": "^3.0.1",
