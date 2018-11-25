@@ -9,3 +9,4 @@ Vue.component(
     'fa-icon',
     require('@fortawesome/vue-fontawesome').FontAwesomeIcon
 )
+Vue.component('loader', require('@/components/Utility/Loader').default)
