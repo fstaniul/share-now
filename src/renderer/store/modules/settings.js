@@ -2,7 +2,8 @@ export default {
     state: {
         name: '',
         image: '',
-        firstStart: true
+        firstStart: true,
+        port: 8124
     },
     mutations: {
         'set-image' (state, payload) {
