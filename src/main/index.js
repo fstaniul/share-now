@@ -2,6 +2,7 @@
 
 import { app, BrowserWindow } from 'electron'
 import './store'
+import './image-resize'
 
 /**
  * Set `__static` path to static files in production
@@ -13,7 +14,7 @@ if (process.env.NODE_ENV !== 'development') {
         .replace(/\\/g, '\\\\')
 }
 
-let mainWindow
+export let mainWindow
 const winURL =
     process.env.NODE_ENV === 'development'
         ? `http://localhost:9080`
