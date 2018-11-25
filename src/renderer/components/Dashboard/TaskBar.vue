@@ -3,7 +3,7 @@
     <div class="task-bar bg-gray-light">
       <div class="header text-blue font-bold">TASKS</div>
     </div>
-    <button class="task-bar-btn absolute hover:bg-gray text-gray-dark" @click="closed = !closed">
+    <button class="task-bar-btn absolute bg-gray-light hover:bg-gray text-gray-dark" @click="closed = !closed">
       <fa-icon :icon="btnIcon"></fa-icon>
     </button>
   </div>
@@ -49,7 +49,6 @@ export default {
     .task-bar-btn {
       top: -32px;
       border-radius: 6px 0 0 0;
-      @apply .bg-gray-light;
     }
     .task-bar {
       height: 0px;

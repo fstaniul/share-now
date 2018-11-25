@@ -1,11 +1,11 @@
 <template>
-    <div class="h-screen w-full">
-        <div class="flex flex-row header-container">
+    <div class="h-screen w-full dashboard-grid">
+        <div class="flex flex-row header-container mb-4">
             <logo class="logo" />
             <nav-bar class="ml-auto" />
         </div>
-        <div class="profiles-container">
-          <profile v-for="profile of usersOnline" :profile="profile" :key="profile.id"></profile>
+        <div class="profiles-container overflow-x-hidden overflow-y-auto">
+          <profile class="mx-auto" v-for="profile of usersOnline" :profile="profile" :key="profile.id"></profile>
         </div>
         <task-bar />
     </div>
@@ -26,17 +26,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.profiles.container {
-  padding: 20px 40px 0 40px;
+.profiles-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 150px;
+  grid-auto-rows: 150px;
+  grid-gap: 15px;
 }
 
 .header-container {
   padding-top: 40px;
-  padding-left: 40px;
-  padding-right: 40px;
   font-size: 32px;
 }
 .logo {
   font-size: 32px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content 1fr;
+  padding: 0 40px 0 40px;
 }
 </style>

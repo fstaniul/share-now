@@ -1,9 +1,9 @@
 <template>
     <nav class="text-2rem">
-        <button type=button class="bell-btn mr-3 text-gray-dark hover:text-blue">
+        <button type=button class="bell-btn mr-3 text-gray hover:text-blue">
             <fa-icon icon="bell"></fa-icon>
         </button>
-        <button type=button class="cog-btn text-gray-dark hover:text-blue">
+        <button type=button class="cog-btn text-gray hover:text-blue">
             <fa-icon icon="cog"></fa-icon>
         </button>
     </nav>
