@@ -2,7 +2,13 @@ import Vue from 'vue'
 
 export default {
     state: {
-        users: {},
+        users: {
+            '192.158.0.1': {
+                name: 'mommy',
+                image: '',
+                ip: '192.158.0.1'
+            }
+        },
         loading: false
     },
     mutations: {
@@ -18,10 +24,13 @@ export default {
     },
     getters: {
         users (state) {
-            return state.users
+            return Object.values(state.users)
         },
         'users-loading' (state) {
             return state.loading
+        },
+        getUserByIp (state) {
+            return ip => state.users[ip]
         }
     },
     actions: {

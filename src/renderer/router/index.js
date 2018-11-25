@@ -35,6 +35,11 @@ export default new Router({
             component: require('@/components/Dashboard').default
         },
         {
+            path: 'user/:ip',
+            name: 'user',
+            component: require('@/components/User').default
+        },
+        {
             path: '*',
             redirect: '/'
         }

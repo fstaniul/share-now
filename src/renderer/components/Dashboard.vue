@@ -19,7 +19,7 @@ export default {
     },
     computed: {
         usersOnline () {
-            return this.$store.state.users.online
+            return this.$store.getters.users
         }
     }
 }

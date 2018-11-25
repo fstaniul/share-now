@@ -6,7 +6,19 @@ import {
     faCog,
     faImage,
     faCaretRight,
-    faPlus
+    faPlus,
+    faUpload,
+    faArrowCircleLeft
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faMinus, faTimes, faBell, faCog, faImage, faCaretRight, faPlus)
+library.add(
+    faMinus,
+    faTimes,
+    faBell,
+    faCog,
+    faImage,
+    faCaretRight,
+    faPlus,
+    faUpload,
+    faArrowCircleLeft
+)

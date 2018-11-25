@@ -34,7 +34,7 @@ export default {
     },
     methods: {
         click () {
-            this.$router.push({name: 'file-share', query: {id: this.profile.id}})
+            this.$router.push({name: 'user', params: {ip: this.profile.ip}})
         }
     }
 }

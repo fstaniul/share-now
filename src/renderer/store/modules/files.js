@@ -20,8 +20,11 @@ export default {
         }
     },
     getters: {
-        getFileById: state => {
+        getFileById (state) {
             return id => state.filter(f => f.id === id)
+        },
+        getFilesByUserIp (state) {
+            return ip => state.filter(f => f.ip === ip)
         }
     }
 }

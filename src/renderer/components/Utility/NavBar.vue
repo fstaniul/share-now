@@ -1,5 +1,5 @@
 <template>
-    <nav>
+    <nav class="text-2rem">
         <button type=button class="bell-btn mr-3 text-gray-dark hover:text-blue">
             <fa-icon icon="bell"></fa-icon>
         </button>
