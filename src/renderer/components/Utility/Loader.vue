@@ -27,10 +27,10 @@
   width: 51px;
   height: 51px;
   margin: 6px;
-  border: 6px solid #fff;
+  border: 6px solid #0c75ff;
   border-radius: 50%;
   animation: loader-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #fff transparent transparent transparent;
+  border-color: #0c75ff transparent transparent transparent;
 }
 .loader-ring div:nth-child(1) {
   animation-delay: -0.45s;
