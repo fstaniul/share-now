@@ -1,0 +1,23 @@
+$timingFunctions: ease, ease-out, ease-in, ease-in-out, linear;
+@each $timing in $timingFunctions {
+  .tr-#{$timing} {
+    transition-timing-function: $timing;
+  }
+}
+
+$durations: 300ms, 500ms, 600ms, 1s, 1.5s, 2s;
+@each $duration in $durations {
+  .tr-#{$duration} {
+    transition-duration: $duration;
+  }
+  .tr-delay-#{$duration} {
+    transition-delay: $duration;
+  }
+}
+
+$transitionProperties: all, height, width, opacity, transform, color, background;
+@each $transitionProperty in $transitionProperties {
+  .tr-#{$transitionProperty} {
+    transition-property: $transitionProperty;
+  }
+}
