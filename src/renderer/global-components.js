@@ -10,3 +10,4 @@ Vue.component(
     require('@fortawesome/vue-fontawesome').FontAwesomeIcon
 )
 Vue.component('loader', require('@/components/Utility/Loader').default)
+Vue.component('nav-bar', require('@/components/Utility/NavBar').default)
