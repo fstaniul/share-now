@@ -1,13 +1,19 @@
 <template>
-    <div class="container rounded-full border border-gray bg-transparent relative flex justify-center items-center flex-col cursor-pointer" @click="selectFile" :style="containerStyles">
-        <template v-if="!value && !loading">
-            <div class="image-icon-contianer"><fa-icon icon="image"></fa-icon></div>
-            <span class="pb-3">SELECT PICTURE</span>
-        </template>
-        <template v-if="loading">
-            <loader />
-        </template>
-    </div>
+  <div
+    class="container rounded-full border border-gray bg-transparent relative flex justify-center items-center flex-col cursor-pointer"
+    @click="selectFile"
+    :style="containerStyles"
+  >
+    <template v-if="!value && !loading">
+      <div class="image-icon-contianer">
+        <fa-icon icon="image"></fa-icon>
+      </div>
+      <span class="pb-3">SELECT PICTURE</span>
+    </template>
+    <template v-if="loading">
+      <loader/>
+    </template>
+  </div>
 </template>
 
 <script>
