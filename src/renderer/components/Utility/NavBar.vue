@@ -1,17 +1,21 @@
 <template>
-    <nav class="text-2rem">
-        <button type=button class="bell-btn mr-1 text-gray hover:text-blue">
-            <fa-icon icon="bell"></fa-icon>
-        </button>
-        <button type=button class="cog-btn text-gray hover:text-blue">
-            <fa-icon icon="cog"></fa-icon>
-        </button>
-    </nav>
+  <nav class="text-2rem">
+    <button type="button" class="bell-btn mr-1 text-gray hover:text-blue">
+      <fa-icon icon="bell"></fa-icon>
+    </button>
+    <button type="button" class="cog-btn text-gray hover:text-blue" @click="gotoSettings()">
+      <fa-icon icon="cog"></fa-icon>
+    </button>
+  </nav>
 </template>
 
 <script>
     export default {
-
+        methods: {
+            gotoSettings () {
+                this.$router.push({name: 'settings'})
+            }
+        }
     }
 </script>
 
