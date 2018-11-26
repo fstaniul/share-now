@@ -8,7 +8,9 @@ import {
     faCaretRight,
     faPlus,
     faUpload,
-    faArrowCircleLeft
+    faArrowCircleLeft,
+    faFileDownload,
+    faFileUpload
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -20,5 +22,7 @@ library.add(
     faCaretRight,
     faPlus,
     faUpload,
-    faArrowCircleLeft
+    faArrowCircleLeft,
+    faFileDownload,
+    faFileUpload
 )
