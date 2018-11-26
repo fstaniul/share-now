@@ -11,3 +11,11 @@ Vue.component(
 )
 Vue.component('loader', require('@/components/Utility/Loader').default)
 Vue.component('nav-bar', require('@/components/Utility/NavBar').default)
+Vue.component(
+    'rounded-image-selector',
+    require('@/components/Utility/RoundedImageSelector').default
+)
+Vue.component(
+    'floating-label-input',
+    require('@/components/Utility/FloatingLabelInput').default
+)
