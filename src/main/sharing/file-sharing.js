@@ -110,7 +110,11 @@ router.post('/request-file', (req, res) => {
                 id: uuid.v4(),
                 ip: req.ip,
                 name,
-                size
+                size,
+                timestamp: new Date(),
+                direction: 'download',
+                status: 'requested',
+                progress: 0
             }
             store.dispatch('new-file', data)
 
