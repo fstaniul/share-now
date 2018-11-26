@@ -55,6 +55,7 @@ const credentials = (() => {
 })()
 
 const app = express()
+export default app
 app.use(express.json({ limit: '5mb' }))
 
 const server = createServer(credentials, app)
