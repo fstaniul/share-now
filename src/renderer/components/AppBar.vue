@@ -3,7 +3,7 @@
     <button class="app-bar-btn bg-red active:shadow-inner" @click="close()">
       <fa-icon icon="times"></fa-icon>
     </button>
-    <button class="app-bar-btn bg-yellow active-shadow-inner" @click="minimize()">
+    <button class="app-bar-btn bg-orange active-shadow-inner" @click="minimize()">
       <fa-icon icon="minus"></fa-icon>
     </button>
   </div>
@@ -24,6 +24,7 @@ export default {
 
 <style lang="scss" scoped>
 .app-bar {
+    z-index: 100000000;
   position: fixed;
   top: 0;
   left: 0;

@@ -1,21 +1,21 @@
 <template>
   <div
-    class="file-details-container relative bg-gray-lighter flex flex-row items-center border border-gray-light"
+    class="file-details-container relative bg-grey-lighter flex flex-row items-center border border-grey-light"
   >
     <fa-icon
-      class="icon text-gray mx-4"
+      class="icon text-grey-darker mx-4"
       :icon="file.direction === 'download' ? 'file-download' : 'file-upload'"
     />
-    <span>{{ file.name }}</span>
-    <span class="ml-auto mr-3 font-source text-gray">{{ statusText }}</span>
+    <span class="text-black">{{ file.name }}</span>
+    <span class="ml-auto mr-3 text-grey-dark status-text">{{ statusText }}</span>
     <div class="progress-container">
       <rounded-progress
         :progress="file.progress"
         :size="70"
-        class="bg-gray-lighter border border-gray-light"
+        class="bg-grey-lighter border border-grey-light"
       />
       <button
-        class="rp-count bg-gray-lighter cursor-default"
+        class="rp-count bg-grey-lighter cursor-default"
         :class="{'openBtn cursor-pointer text-white': file.status === 'completed' && file.direction === 'download'}"
         @click="btnClick()"
       >
@@ -97,8 +97,12 @@ export default {
         @apply bg-blue;
 
         &:hover {
-            @apply bg-blue-darker;
+            @apply bg-blue-dark;
         }
     }
+}
+
+.status-text {
+    font-size: 12px;
 }
 </style>

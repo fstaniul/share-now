@@ -1,11 +1,11 @@
 <template>
   <div
-    class="ris-container border border-gray-light rounded-full cursor-pointer relative"
+    class="ris-container border border-grey-light rounded-full cursor-pointer relative"
     :style="styles"
     @click="selectImage()"
   >
     <div
-      class="absolute top-left-0 text-gray ris-overlay w-full h-full flex flex-col items-center justify-center rounded-full"
+      class="absolute top-left-0 text-grey ris-overlay w-full h-full flex flex-col items-center justify-center rounded-full"
       :class="{visible: !value}"
     >
       <fa-icon class="text-5xl" icon="image"/>

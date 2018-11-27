@@ -1,17 +1,17 @@
 <template>
-  <div class="--apppad --appbarpad pb-6 h-screen overflow-y-auto relative">
+  <div class="--apppad --appbarpad pb-6 h-screen overflow-y-auto relative text-black">
     <button
-      class="closebtn flex flex-col items-center justify-center rounded-full border border-gray text-gray hover:bg-gray-lighter hover:text-gray-dark hover:border-gray-dark"
+      class="closebtn flex flex-col items-center justify-center rounded-full border border-grey text-grey-darker hover:bg-grey-lighter hover:text-grey-darkest hover:border-grey-darker"
       @click="$router.go(-1)"
     >
       <fa-icon icon="times"/>esc
     </button>
     <h1 class="mt-3">Settings</h1>
-    <div class="mt-1 text-gray">Don't forget to save changes!</div>
-    <hr class="border-t border-gray-light my-6">
+    <div class="mt-1 text-grey-darkest">Don't forget to save changes!</div>
+    <hr class="border-t border-grey-light my-6">
     <h3>
       <span class="mr-2">Profile</span>
-      <span class="text-gray text-xs">Profile picture and name</span>
+      <span class="text-grey-darker text-xs">Profile picture and name</span>
     </h3>
     <div class="flex flex-row items-center justify-center mt-3">
       <rounded-image-selector v-model="settings.image" text="select picture" :size="150"/>

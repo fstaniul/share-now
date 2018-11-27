@@ -1,7 +1,7 @@
 <template>
   <div :style="styles" class="relative">
     <input
-      class="border-b border-gray-light w-full px-4 py-2 bg-transparent outline-none focus:border-blue"
+      class="border-b border-grey-light w-full px-4 py-2 bg-transparent outline-none focus:border-blue"
       :type="type"
       :value="value"
       @input="onInput($event)"

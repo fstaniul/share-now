@@ -5,9 +5,9 @@
       <nav-bar class="ml-auto"/>
     </div>
     <header class="mb-5">
-      <hr class="border border-gray-light mb-6">
-      <h2 class="text-gray-dark">Users online</h2>
-      <span class="text-gray">Select user to share your files with...</span>
+      <hr class="border border-grey-light mb-6">
+      <h2 class="text-black">Users online</h2>
+      <span class="text-grey-darkest">Select user to share your files with...</span>
     </header>
     <div class="profiles-container overflow-x-hidden overflow-y-auto">
       <profile class="mx-auto" v-for="profile of usersOnline" :profile="profile" :key="profile.id"></profile>

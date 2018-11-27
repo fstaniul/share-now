@@ -1,10 +1,12 @@
 <template>
   <div class="profile-container relative overflow-hidden cursor-pointer" @click="click()">
     <div class="absolute top-left-0">
-      <rounded-progress :size="150" :progress="progress" class="bg-gray" />
+      <rounded-progress :size="150" :progress="progress" class="bg-grey"/>
     </div>
-    <div class="image absolute rounded-full bg-gray-light" :style="imageStyle"></div>
-    <div class="mask bg-black absolute flex flex-col items-center justify-center rounded-full text-white">
+    <div class="image absolute rounded-full bg-grey-light" :style="imageStyle"></div>
+    <div
+      class="mask bg-black absolute flex flex-col items-center justify-center rounded-full text-white"
+    >
       <span>{{ profile.name }}</span>
       <span class="font-source" v-if="progress > 0 && progress < 100">{{progress}}%</span>
     </div>

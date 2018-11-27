@@ -1,11 +1,11 @@
 <template>
   <div
-    class="container rounded-full border border-gray bg-transparent relative flex justify-center items-center flex-col cursor-pointer"
+    class="container rounded-full border border-grey bg-transparent relative flex justify-center items-center flex-col cursor-pointer"
     @click="selectFile"
     :style="containerStyles"
   >
     <template v-if="!value && !loading">
-      <div class="image-icon-contianer">
+      <div class="image-icon-contianer text-grey-dark">
         <fa-icon icon="image"></fa-icon>
       </div>
       <span class="pb-3">SELECT PICTURE</span>

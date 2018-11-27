@@ -1,9 +1,12 @@
 <template>
   <div class="absolute task-bar-container w-full" :class="{closed: closed}">
-    <div class="task-bar bg-gray-light">
+    <div class="task-bar bg-grey-light">
       <div class="header text-blue font-bold">TASKS</div>
     </div>
-    <button class="task-bar-btn absolute bg-gray-light hover:bg-gray text-gray-dark" @click="closed = !closed">
+    <button
+      class="task-bar-btn absolute bg-grey-light hover:bg-grey text-grey-dark"
+      @click="closed = !closed"
+    >
       <fa-icon :icon="btnIcon"></fa-icon>
     </button>
   </div>
