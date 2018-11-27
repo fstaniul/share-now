@@ -8,17 +8,20 @@
   - [x] Create first launch pages (shown when user starts the app for the first time)
   - [ ] Main dashboard
     - [x] Add profiles of online users to main dashboard
-    - [ ] For each user add a profile page showing every file shared with this user
+    - [ ] For each user add a profile page showing every file shared with this user, file states:
+       - [x] In Progress
+       - [ ] Requested (with accept and reject actions)
+       - [x] Completed
     - [ ] Add tasks bar to the main bashboard showing all files currently being shared
-    - [ ] Add loader shown when app is looking for currently online clients.
-  - [ ] Settings
-    - [ ] Changing of name and image.
+    - [x] Add loader shown when app is looking for currently online clients.
+  - [x] Settings
+    - [x] Changing of name and image.
     - [ ] Changing of default apps port used for communications.
   - [ ] Notifications
-- [ ] Create sharing module
-  - [ ] Define messaging protocol or use existing one (HTTPS)
-  - [ ] Add encryption for security
-- [ ] Add persistance of certain data stored in store. This one must be settings and first run also.
+- [x] Create sharing module
+  - [x] Define messaging protocol or use existing one (HTTPS)
+  - [x] Add encryption for security
+- [-] Add persistance of certain data stored in store. This one must be settings and first run also.
   - [ ] Add way to erase the data.
   - [ ] Store data in appData.
 - [ ] Create auto-updating/updating module
