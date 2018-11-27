@@ -24,7 +24,8 @@ function requestFiles (files, ip) {
                 size: stat.size,
                 progress: 0,
                 status: 'requested',
-                ip
+                ip,
+                direction: 'upload'
             }
 
             axios.post(`https://${ip}:${store.state.settings.port}/request-file`, {
