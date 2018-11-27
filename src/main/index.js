@@ -3,8 +3,7 @@
 import { app, BrowserWindow } from 'electron'
 import './store'
 import './image-resize'
-import './sharing/file-sharing'
-import './sharing/user-discovery'
+import './sharing'
 
 /**
  * Set `__static` path to static files in production
