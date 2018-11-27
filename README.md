@@ -6,11 +6,11 @@
 
 - [ ] Create UI
   - [x] Create first launch pages (shown when user starts the app for the first time)
-  - [ ] Main dashboard
+  - [x] Main dashboard
     - [x] Add profiles of online users to main dashboard
-    - [ ] For each user add a profile page showing every file shared with this user, file states:
+    - [x] For each user add a profile page showing every file shared with this user, file states:
        - [x] In Progress
-       - [ ] Requested (with accept and reject actions)
+       - [x] Requested (with accept and reject actions)
        - [x] Completed
     - [ ] Add tasks bar to the main bashboard showing all files currently being shared
     - [x] Add loader shown when app is looking for currently online clients.
