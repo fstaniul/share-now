@@ -7,6 +7,7 @@ import uuid from 'uuid'
 import * as mkdirp from 'mkdirp'
 import * as path from 'path'
 import * as fs from 'fs'
+import uploadFile from './upload-with-progress'
 
 const credentials = (() => {
     const keyPair = forge.pki.rsa.generateKeyPair(2048)
@@ -128,15 +129,29 @@ router.post('/request-file', (req, res) => {
 })
 
 router.post('/file-status', (req, res) => {
-    if (req.body && req.body.id && req.body.accepted) {
-        store.dispatch('update-file', {
-            id: req.body.id,
-            data: {
-                accepted: req.body.accepted
-            }
-        })
+    if (req.body && req.body.id) {
+        if (req.body.status === 'accepted') {
+            store.dispatch('update-file', {
+                id: req.body.id,
+                data: {
+                    'status': 'in-progress',
+                    progress: 0
+                }
+            })
 
-        res.status(201).end()
+            res.status(201).end()
+
+            setTimeout(() => uploadFile(req.ip, req.body.id))
+        }
+
+        if (req.body.status === 'error' || req.body.status === 'rejected') {
+            store.dispatch('update-file', {
+                id: req.body.id,
+                data: {
+                    status: req.body.status
+                }
+            })
+        }
     }
 })
 
