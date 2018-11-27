@@ -141,7 +141,7 @@ router.post('/file-status', (req, res) => {
 
             res.status(201).end()
 
-            setTimeout(() => uploadFile(req.ip, req.body.id))
+            setTimeout(() => uploadFile(req.ip, req.body.id).catch(err => console.log(err)))
         }
 
         if (req.body.status === 'error' || req.body.status === 'rejected') {
