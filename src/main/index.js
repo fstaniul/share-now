@@ -4,6 +4,7 @@ import { app, BrowserWindow } from 'electron'
 import './store'
 import './image-resize'
 import './sharing/file-sharing'
+import './sharing/user-discovery'
 
 /**
  * Set `__static` path to static files in production
@@ -42,7 +43,9 @@ function createWindow () {
     })
 }
 
-app.on('ready', createWindow)
+app.on('ready', () => {
+    createWindow()
+})
 
 app.on('window-all-closed', () => {
     app.quit()

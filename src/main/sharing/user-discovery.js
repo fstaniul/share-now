@@ -2,23 +2,27 @@ const deviceDiscovery = require('device-discovery')
 const EventEmitter = require('events')
 const os = require('os')
 const axios = require('axios')
-const settings = require('../settings.js')
-const store = require('../store')
-const { ipcMain } = require('electron')
+const store = require('../store').default
+const { ipcMain, app } = require('electron')
 
-const gee = EventEmitter()
+const gee = new EventEmitter()
 
-export function findUsers () {
+function findUsers () {
     return new Promise(resolve => {
+        console.log('looking for users online!')
         const discovery = discoverDevices()
+        let devicesToScan = 0
+        let scannedDevices = 0
+        let finished = false
         discovery.on('device', ip => {
+            devicesToScan += 1
             axios
-                .post(`https://${ip}:${settings.get('port')}/identify`, {
-                    name: settings.name,
-                    image: settings.image
+                .post(`https://${ip}:${store.state.settings.port}/identify`, {
+                    name: store.state.settings.name,
+                    image: store.state.settings.image
                 })
                 .then(res => {
-                    console.log(res.body)
+                    scannedDevices += 1
                     if (res.body.name && res.body.image) {
                         gee.emit('user', {
                             name: res.body.name,
@@ -26,22 +30,25 @@ export function findUsers () {
                             ip
                         })
                     }
+                    if (scannedDevices === devicesToScan && finished) resolve()
                 })
-                .catch(err => {
-                    console.log(err)
+                .catch(() => {
+                    scannedDevices += 1
+                    if (scannedDevices === devicesToScan && finished) resolve()
                 })
         })
         discovery.on('done', () => {
             discovery.removeAllListeners()
-            resolve()
+            finished = true
         })
     })
 }
 
 function discoverDevices () {
-    const ee = EventEmitter()
-    const interfaces = Object.keys(os.networkInterfaces())
+    const ee = new EventEmitter()
+    const interfaces = getNetworkInterfaces()
     let interfacesScanned = 0
+    console.log('interfaces too scan', interfaces)
     interfaces.forEach(iface => {
         const discover = deviceDiscovery({
             iface: iface,
@@ -54,20 +61,47 @@ function discoverDevices () {
             ee.emit('device', ip)
         })
         discover.on('done', () => {
-            interfacesScanned++
-            if (interfacesScanned === interfaces.length) ee.emit('done')
+            console.log('done with ', iface)
+            interfacesScanned += 1
+            if (interfacesScanned === interfaces.length) {
+                console.log('done with all interfaces, emiting done')
+                ee.emit('done')
+            }
         })
     })
 
     return ee
 }
 
+function getNetworkInterfaces () {
+    const ifaces = os.networkInterfaces()
+    return Object.keys(ifaces)
+        .map(k => [k, ifaces[k]])
+        .map(([key, iface]) => [key, iface.find(f => f.family === 'IPv4')]) // reduce to only ipv4
+        .filter(([key, iface]) => iface.address !== '127.0.0.1' && !iface.internal) // ignore loopback interface
+        .map(([key]) => key)
+}
+
+async function loadUsers () {
+    store.dispatch('loading-users')
+    await findUsers()
+    store.dispatch('loaded-users')
+    console.log('finished-loading-users')
+}
+export default loadUsers
+
 gee.on('user', user => {
     store.dispatch('new-user', user)
 })
 
-ipcMain.on('discover-users', async () => {
-    store.dispatch('loading-users')
-    await findUsers()
-    store.dispatch('loaded-users')
+ipcMain.on('discover-users', loadUsers)
+
+let loadUsersInterval
+app.on('ready', () => {
+    loadUsers()
+    if (loadUsersInterval) clearInterval(loadUsersInterval)
+    loadUsersInterval = setInterval(loadUsers, 60000)
+})
+app.on('close-all-windows', () => {
+    if (loadUsersInterval) clearInterval(loadUsersInterval)
 })
