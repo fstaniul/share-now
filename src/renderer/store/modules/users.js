@@ -17,9 +17,7 @@ export default {
             Vue.set(state.users, user.ip, user)
         },
         'set-users-loading' (state, payload) {
-            if (payload && Object.keys(state.users).length === 0) {
-                state.loading = true
-            } else state.loading = false
+            state.loading = payload
         }
     },
     getters: {
@@ -38,10 +36,10 @@ export default {
             ctx.commit('new-user', user)
         },
         'loading-users' (ctx) {
-            ctx.commit('loading-users', true)
+            ctx.commit('set-users-loading', true)
         },
         'loaded-users' (ctx) {
-            ctx.commit('loaded-users', false)
+            ctx.commit('set-users-loading', false)
         }
     }
 }

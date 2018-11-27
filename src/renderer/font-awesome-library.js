@@ -10,7 +10,8 @@ import {
     faUpload,
     faArrowCircleLeft,
     faFileDownload,
-    faFileUpload
+    faFileUpload,
+    faRedoAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -24,5 +25,6 @@ library.add(
     faUpload,
     faArrowCircleLeft,
     faFileDownload,
-    faFileUpload
+    faFileUpload,
+    faRedoAlt
 )
