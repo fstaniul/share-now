@@ -16,8 +16,9 @@
         <span class="text-grey-black mb-2 text-2xl">{{ this.user.name }}</span>
         <button
           class="px-6 py-3 bg-blue hover:bg-blue-dark text-white text-lg upload-btn rounded-full tr-300ms tr-ease tr-background"
+          @click="sendFile()"
         >
-          <fa-icon icon="upload"></fa-icon>Send file
+          <fa-icon icon="upload"></fa-icon> Send file
         </button>
       </div>
     </header>
@@ -52,6 +53,11 @@
                     'background-size': 'cover',
                     'background-position': 'center'
                 }
+            }
+        },
+        methods: {
+            sendFile () {
+                this.$electron.ipcRenderer.send('select-and-upload-files', this.user.ip)
             }
         }
     }
