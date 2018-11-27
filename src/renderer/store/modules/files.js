@@ -1,10 +1,29 @@
 import Vue from 'vue'
 
 export default {
-    state: [],
+    state: [
+        {
+            name: 'file.ext',
+            size: 1250,
+            direction: 'download',
+            ip: '192.158.0.1',
+            id: 'aea11d22-45d0-4846-8483-2d7a528afcb7',
+            status: 'in-progress',
+            progress: 45
+        },
+        {
+            name: 'file.ext',
+            size: 1250,
+            direction: 'download',
+            ip: '192.158.0.1',
+            id: 'aea11d22-45d0-4846-8483-2d7a528afcb8',
+            status: 'completed',
+            progress: 100
+        }
+    ],
     mutations: {
         'add-file' (state, file) {
-            state.push(file)
+            state.push({ ...file, timestamp: new Date().getTime() })
         },
         'update-file' (state, { id, data }) {
             const index = state.findIndex(f => f.id === id)
@@ -25,6 +44,11 @@ export default {
         },
         getFilesByUserIp (state) {
             return ip => state.filter(f => f.ip === ip)
+        },
+        getInProgressFiles (state) {
+            return state
+                .filter(f => f.status === 'in-progress')
+                .sort((x, y) => x.timestamp - y.timestamp)
         }
     }
 }

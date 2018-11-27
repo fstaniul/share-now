@@ -111,7 +111,6 @@ router.post('/request-file', (req, res) => {
                 ip: req.ip,
                 name,
                 size,
-                timestamp: new Date(),
                 direction: 'download',
                 status: 'requested',
                 progress: 0
