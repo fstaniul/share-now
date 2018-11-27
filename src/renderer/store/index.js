@@ -12,8 +12,21 @@ if (process.env.NODE_ENV === 'production') {
     plugins.push(createPersistedState())
 }
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
     modules,
     plugins,
     strict: process.env.NODE_ENV !== 'production'
 })
+
+if (process.env.NODE_ENV === 'production') {
+    store.replaceState({
+        ...store.state,
+        files: [],
+        users: {
+            users: {},
+            loading: false
+        }
+    })
+}
+
+export default store

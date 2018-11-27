@@ -1,5 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
+import * as uuid from 'uuid'
 import { ipcMain, dialog, app } from 'electron'
 import axios from 'axios'
 import store from '../store'
@@ -10,7 +11,7 @@ function requestFiles (files, ip) {
         fs.stat(fpath, (err, stat) => {
             if (err) {
                 store.dispatch('new-file', {
-                    name: path.basename(fd),
+                    name: path.basename(fpath),
                     path: fpath,
                     status: 'error'
                 })
@@ -22,7 +23,8 @@ function requestFiles (files, ip) {
                 path: fpath,
                 size: stat.size,
                 progress: 0,
-                status: 'requested'
+                status: 'requested',
+                ip
             }
 
             axios.post(`https://${ip}:${store.state.settings.port}/request-file`, {
@@ -37,11 +39,12 @@ function requestFiles (files, ip) {
                     })
                 })
                 .catch(err => {
+                    console.log(err.message)
                     store.dispatch('new-file', {
                         ...data,
-                        status: 'error'
+                        status: 'error',
+                        id: uuid.v1()
                     })
-                    console.log(err)
                 })
         })
     }
