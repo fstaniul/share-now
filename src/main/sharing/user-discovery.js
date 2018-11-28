@@ -15,13 +15,15 @@ function findUsers () {
         let scannedDevices = 0
         let finished = false
         discovery.on('device', ip => {
+            console.log('Calling device', ip, `http://${ip}:${store.state.settings.port}/identify`)
             devicesToScan += 1
             axios
-                .post(`https://${ip}:${store.state.settings.port}/identify`, {
+                .post(`http://${ip}:${store.state.settings.port}/identify`, {
                     name: store.state.settings.name,
                     image: store.state.settings.image
                 })
                 .then(res => {
+                    console.log(res)
                     scannedDevices += 1
                     if (res.body.name && res.body.image) {
                         gee.emit('user', {
@@ -32,7 +34,8 @@ function findUsers () {
                     }
                     if (scannedDevices === devicesToScan && finished) resolve()
                 })
-                .catch(() => {
+                .catch((err) => {
+                    console.log(err.message)
                     scannedDevices += 1
                     if (scannedDevices === devicesToScan && finished) resolve()
                 })
@@ -58,6 +61,7 @@ function discoverDevices () {
             type: 'ICMP'
         })
         discover.on('device', ip => {
+            console.log('found device', ip)
             ee.emit('device', ip)
         })
         discover.on('done', () => {

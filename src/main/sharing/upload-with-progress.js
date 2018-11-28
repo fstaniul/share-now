@@ -1,4 +1,4 @@
-import * as https from 'https'
+import * as http from 'http'
 import * as fs from 'fs'
 import store from '../store'
 import Deferred from '../utility/deferred'
@@ -11,11 +11,11 @@ function sendStatusError (url, id) {
 export default function uploadFile (ip, id) {
     const prom = new Deferred()
     const file = store.getters.getFileById(id)
-    const url = `https://${ip}:${store.state.settings.port}`
+    const url = `http://${ip}:${store.state.settings.port}`
 
     if (!file) prom.reject(new Error(`File with id ${id} does not exist!`))
 
-    const req = https.request(`${url}/file-transfer/${id}`, {method: 'POST'})
+    const req = http.request(`${url}/file-transfer/${id}`, {method: 'POST'})
 
     req.on('error', (err) => {
         store.dispatch('update-file', {

@@ -6,66 +6,75 @@ import * as fs from 'fs'
 import store from '../store'
 import uuid from 'uuid'
 import uploadFile from './upload-with-progress'
-import { createServer } from 'https'
-import { createSecureContext } from 'tls'
+import { createServer } from 'http'
+// import { createSecureContext } from 'tls'
 import { ipcMain } from 'electron'
 
-const credentials = (() => {
-    const keyPair = forge.pki.rsa.generateKeyPair(2048)
-    const cert = forge.pki.createCertificate()
-    cert.publicKey = keyPair.publicKey
-    cert.serialNumber = '01'
-    cert.validity.notBefore = new Date()
-    cert.validity.notAfter = new Date()
-    cert.validity.notAfter.setFullYear(
-        cert.validity.notBefore.getFullYear() + 1
-    )
-    const certAttrs = [
-        {
-            name: 'commonName',
-            value: 'share-now.com'
-        },
-        {
-            name: 'countryName',
-            value: 'PL'
-        },
-        {
-            shortName: 'ST',
-            value: 'Poland'
-        },
-        {
-            name: 'localityName',
-            value: 'Poland'
-        },
-        {
-            name: 'organizationName',
-            value: 'SHAREnow'
-        },
-        {
-            shortName: 'OU',
-            value: 'SHAREnow'
-        }
-    ]
-    cert.setSubject(certAttrs)
-    cert.setIssuer(certAttrs)
-    cert.sign(keyPair.privateKey)
+// console.log(createSecureContext)
 
-    return createSecureContext({
-        key: forge.pki.privateKeyToPem(keyPair.privateKey),
-        cert: forge.pki.certificateToPem(cert)
-    })
-})()
+// const credentials = (() => {
+//     const keyPair = forge.pki.rsa.generateKeyPair(2048)
+//     const cert = forge.pki.createCertificate()
+//     cert.publicKey = keyPair.publicKey
+//     cert.serialNumber = '01'
+//     cert.validity.notBefore = new Date()
+//     cert.validity.notAfter = new Date()
+//     cert.validity.notAfter.setFullYear(
+//         cert.validity.notBefore.getFullYear() + 1
+//     )
+//     const certAttrs = [
+//         {
+//             name: 'commonName',
+//             value: 'SHAREnow'
+//         },
+//         {
+//             name: 'countryName',
+//             value: 'PL'
+//         },
+//         {
+//             shortName: 'ST',
+//             value: 'Poland'
+//         },
+//         {
+//             name: 'localityName',
+//             value: 'Poland'
+//         },
+//         {
+//             name: 'organizationName',
+//             value: 'SHAREnow'
+//         },
+//         {
+//             shortName: 'OU',
+//             value: 'SHAREnow'
+//         }
+//     ]
+//     cert.setSubject(certAttrs)
+//     cert.setIssuer(certAttrs)
+//     cert.sign(keyPair.privateKey)
+
+//     console.log(forge.pki.certificateToPem(cert))
+//     console.log(forge.pki.privateKeyToPem(keyPair.privateKey))
+
+//     return createSecureContext({
+//         key: forge.pki.privateKeyToPem(keyPair.privateKey),
+//         cert: forge.pki.certificateToPem(cert)
+//     })
+// })()
 
 const app = express()
 export default app
 app.use(express.json({ limit: '5mb' }))
 
-const server = createServer(credentials, app)
+// const server = createServer(credentials, app)
+const server = createServer(app)
 
 export function start () {
     return new Promise(resolve => {
         server.listen(store.state.settings.port, '0.0.0.0', resolve)
     })
+        .then(() => {
+            console.log('Server started')
+        })
 }
 
 export function stop () {

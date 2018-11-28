@@ -57,7 +57,7 @@ export default {
                 }
             })
 
-            axios.post(`https://${file.ip}:${rootState.settings.port}/file-status`, {id, status})
+            axios.post(`http://${file.ip}:${rootState.settings.port}/file-status`, {id, status})
                 .catch(err => {
                     console.log(err)
                     commit('update-file', {

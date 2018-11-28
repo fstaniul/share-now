@@ -28,7 +28,7 @@ function requestFiles (files, ip) {
                 direction: 'upload'
             }
 
-            axios.post(`https://${ip}:${store.state.settings.port}/request-file`, {
+            axios.post(`http://${ip}:${store.state.settings.port}/request-file`, {
                 name: data.name,
                 size: data.size
             })
