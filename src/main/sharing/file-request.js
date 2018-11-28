@@ -33,14 +33,14 @@ function requestFiles (files, ip) {
                 size: data.size
             })
                 .then(res => {
-                    if (!res.body.id) throw new Error('missing id in response')
+                    if (!res.data.id) throw new Error('missing id in response')
                     store.dispatch('new-file', {
-                        data,
-                        id: res.body.id
+                        ...data,
+                        id: res.data.id
                     })
                 })
                 .catch(err => {
-                    console.log(err.message)
+                    console.error(err.message)
                     store.dispatch('new-file', {
                         ...data,
                         status: 'error',

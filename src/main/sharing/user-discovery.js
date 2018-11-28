@@ -23,12 +23,12 @@ function findUsers () {
                     image: store.state.settings.image
                 })
                 .then(res => {
-                    console.log(res)
+                    console.log(res.data.name)
                     scannedDevices += 1
-                    if (res.body.name && res.body.image) {
+                    if (res.data.name && res.data.image) {
                         gee.emit('user', {
-                            name: res.body.name,
-                            image: res.body.image,
+                            name: res.data.name,
+                            image: res.data.image,
                             ip
                         })
                     }
