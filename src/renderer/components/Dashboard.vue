@@ -30,6 +30,10 @@
 
 <script>
 export default {
+    created () {
+        this.$electron.ipcRenderer.send('start-user-discovery')
+        this.$electron.ipcRenderer.send('start-server')
+    },
     components: {
         'task-bar': require('./Dashboard/TaskBar').default,
         profile: require('./Dashboard/Profile').default

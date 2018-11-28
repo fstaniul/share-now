@@ -97,11 +97,13 @@ gee.on('user', user => {
 ipcMain.on('discover-users', loadUsers)
 
 let loadUsersInterval
-app.on('ready', () => {
+
+ipcMain.on('start-user-discovery', () => {
     loadUsers()
     if (loadUsersInterval) clearInterval(loadUsersInterval)
     loadUsersInterval = setInterval(loadUsers, 60000)
 })
+
 app.on('close-all-windows', () => {
     if (loadUsersInterval) clearInterval(loadUsersInterval)
 })

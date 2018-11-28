@@ -1,13 +1,14 @@
-import { createServer } from 'https'
-import { createSecureContext } from 'tls'
 import * as express from 'express'
 import * as forge from 'node-forge'
-import store from '../store'
-import uuid from 'uuid'
 import * as mkdirp from 'mkdirp'
 import * as path from 'path'
 import * as fs from 'fs'
+import store from '../store'
+import uuid from 'uuid'
 import uploadFile from './upload-with-progress'
+import { createServer } from 'https'
+import { createSecureContext } from 'tls'
+import { ipcMain } from 'electron'
 
 const credentials = (() => {
     const keyPair = forge.pki.rsa.generateKeyPair(2048)
@@ -75,10 +76,16 @@ export function stop () {
 
 store.watch(state => state.settings.port, () => stop().then(start))
 
+ipcMain.on('start-server', start)
+ipcMain.on('stop-server', stop)
+ipcMain.on('restart-server', () => stop().then(start))
+
 const router = express.Router()
 app.use(router)
 
 router.post('/identify', (req, res) => {
+    console.log('Got identify request from', req.ip)
+
     if (!req.body || !req.body.name || !req.body.image) {
         res.status(400)
         res.json({
