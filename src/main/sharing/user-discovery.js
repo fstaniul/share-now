@@ -45,6 +45,9 @@ function findUsers () {
             finished = true
         })
     })
+        .then(() => {
+            console.log('finished requesting all possible clients')
+        })
 }
 
 function discoverDevices () {
