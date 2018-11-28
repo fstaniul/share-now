@@ -78,7 +78,7 @@ function getNetworkInterfaces () {
     return Object.keys(ifaces)
         .map(k => [k, ifaces[k]])
         .map(([key, iface]) => [key, iface.find(f => f.family === 'IPv4')]) // reduce to only ipv4
-        .filter(([key, iface]) => iface.address !== '127.0.0.1' && !iface.internal) // ignore loopback interface
+        .filter(([key, iface]) => iface && iface.address !== '127.0.0.1' && !iface.internal) // ignore loopback interface
         .map(([key]) => key)
 }
 

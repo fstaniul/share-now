@@ -3,33 +3,33 @@ import axios from 'axios'
 
 export default {
     state: [
-        {
-            name: 'file.ext',
-            size: 1250,
-            direction: 'download',
-            ip: '192.158.0.1',
-            id: 'aea11d22-45d0-4846-8483-2d7a528afcb7',
-            status: 'in-progress',
-            progress: 45
-        },
-        {
-            name: 'file.ext',
-            size: 1250,
-            direction: 'download',
-            ip: '192.158.0.1',
-            id: 'aea11d22-45d0-4846-8483-2d7a528afcb8',
-            status: 'completed',
-            progress: 100
-        },
-        {
-            name: 'file.ext',
-            size: 1250,
-            direction: 'download',
-            ip: '192.158.0.1',
-            id: 'aea11d22-45d0-4846-8483-2d7a528afcb9',
-            status: 'requested',
-            progress: 100
-        }
+        // {
+        //     name: 'file.ext',
+        //     size: 1250,
+        //     direction: 'download',
+        //     ip: '192.158.0.1',
+        //     id: 'aea11d22-45d0-4846-8483-2d7a528afcb7',
+        //     status: 'in-progress',
+        //     progress: 45
+        // },
+        // {
+        //     name: 'file.ext',
+        //     size: 1250,
+        //     direction: 'download',
+        //     ip: '192.158.0.1',
+        //     id: 'aea11d22-45d0-4846-8483-2d7a528afcb8',
+        //     status: 'completed',
+        //     progress: 100
+        // },
+        // {
+        //     name: 'file.ext',
+        //     size: 1250,
+        //     direction: 'download',
+        //     ip: '192.158.0.1',
+        //     id: 'aea11d22-45d0-4846-8483-2d7a528afcb9',
+        //     status: 'requested',
+        //     progress: 100
+        // }
     ],
     mutations: {
         'add-file' (state, file) {

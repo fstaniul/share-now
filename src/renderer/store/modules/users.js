@@ -3,11 +3,11 @@ import Vue from 'vue'
 export default {
     state: {
         users: {
-            '192.158.0.1': {
-                name: 'mommy',
-                image: '',
-                ip: '192.158.0.1'
-            }
+            // '192.158.0.1': {
+            //     name: 'mommy',
+            //     image: '',
+            //     ip: '192.158.0.1'
+            // }
         },
         loading: false
     },
