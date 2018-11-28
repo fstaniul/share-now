@@ -4,6 +4,8 @@
 
 #### RoadMap
 
+- [ ] Add checking if clients are still online
+- [ ] Add removing of old files with client
 - [ ] Create UI
   - [x] Create first launch pages (shown when user starts the app for the first time)
   - [x] Main dashboard
@@ -25,6 +27,8 @@
   - [ ] Add way to erase the data.
   - [ ] Store data in appData.
 - [ ] Create auto-updating/updating module
+
+
 
 #### Build Setup
 
