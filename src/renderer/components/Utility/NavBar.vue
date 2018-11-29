@@ -1,6 +1,10 @@
 <template>
   <nav class="text-2rem">
-    <button type="button" class="bell-btn mr-1 text-grey-darker hover:text-blue">
+    <button
+      type="button"
+      class="bell-btn mr-1 text-grey-darker hover:text-blue"
+      @click="toggleNotifications()"
+    >
       <fa-icon icon="bell"></fa-icon>
     </button>
     <button type="button" class="cog-btn text-grey-darker hover:text-blue" @click="gotoSettings()">
@@ -10,13 +14,16 @@
 </template>
 
 <script>
-    export default {
-        methods: {
-            gotoSettings () {
-                this.$router.push({name: 'settings'})
-            }
+export default {
+    methods: {
+        gotoSettings () {
+            this.$router.push({ name: 'settings' })
+        },
+        toggleNotifications () {
+            this.$store.dispatch('toggle-notifications-display')
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

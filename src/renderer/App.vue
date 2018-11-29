@@ -4,28 +4,33 @@
     <transition name="fade" mode="out-in" appear>
       <router-view></router-view>
     </transition>
+    <notifications/>
   </div>
 </template>
 
 <script>
-  export default {
-      name: 'share-now',
-      components: {
-          'app-bar': require('@/components/AppBar').default
-      }
-  }
+export default {
+    name: 'share-now',
+    components: {
+        'app-bar': require('@/components/AppBar').default,
+        notifications: require('@/components/Notifications').default
+    }
+}
 </script>
 
 <style scoped>
-.fade-enter-to, .fade-leave {
-    opacity: 1;
+.fade-enter-to,
+.fade-leave {
+  opacity: 1;
 }
 
-.fade-enter-active, .fade-leave-active {
-    transition: opacity 300ms ease;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 300ms ease;
 }
 
-.fade-leave-to, .fade-enter {
-    opacity: 0;
+.fade-leave-to,
+.fade-enter {
+  opacity: 0;
 }
 </style>

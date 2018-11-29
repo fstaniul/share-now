@@ -8,21 +8,36 @@
       <hr class="border border-grey-light mb-6">
       <div class="flex flex-row">
         <div>
-            <h2 class="text-black">Users online</h2>
-            <span class="text-grey-darkest">Select user to share your files with...</span>
+          <h2 class="text-black">Users online</h2>
+          <span class="text-grey-darkest">Select user to share your files with...</span>
         </div>
-        <button class="ml-auto text-xs flex flex-row justify-center items-center text-grey-darker border-b border-grey-dark hover:text-blue-dark hover:border-blue pb-1 self-center refresh-btn" @click="reloadUsers()" :class="{loading}">
+        <button
+          class="ml-auto text-xs flex flex-row justify-center items-center text-grey-darker border-b border-grey-dark hover:text-blue-dark hover:border-blue pb-1 self-center refresh-btn"
+          @click="reloadUsers()"
+          :class="{loading}"
+        >
           <span class="text display-block mr-1">refresh</span>
           <fa-icon icon="redo-alt" :spin="loading"/>
         </button>
       </div>
     </header>
-    <div v-if="usersOnline.length === 0 && !loading" class="text-center">There are no users on local network.</div>
-    <div v-else-if="usersOnline.length === 0 && loading" class="flex flex-row items-center justify-center">
-        <loader />
+    <div
+      v-if="usersOnline.length === 0 && !loading"
+      class="text-center"
+    >There are no users on local network.</div>
+    <div
+      v-else-if="usersOnline.length === 0 && loading"
+      class="flex flex-row items-center justify-center"
+    >
+      <loader/>
     </div>
-    <transition-group v-else tag="div" name="pltrans" class="profiles-container overflow-x-hidden overflow-y-auto relative">
-        <profile v-for="profile of usersOnline" :profile="profile" :key="profile.ip" />
+    <transition-group
+      v-else
+      tag="div"
+      name="pltrans"
+      class="profiles-container overflow-x-hidden overflow-y-auto relative"
+    >
+      <profile v-for="profile of usersOnline" :profile="profile" :key="profile.ip"/>
     </transition-group>
     <!-- <task-bar /> -->
   </div>
@@ -80,44 +95,47 @@ export default {
 }
 
 .refresh-btn {
-    width: 62px;
-    &.loading {
-        cursor: default;
-        @apply text-blue-dark border-blue;
+  width: 62px;
+  &.loading {
+    cursor: default;
+    @apply text-blue-dark border-blue;
 
-        .text {
-            width: 0px;
-            margin-right: 0;
-        }
-    }
     .text {
-        width: 43px;
-        transition: 300ms ease;
-        transition-property: width, margin;
-        overflow: hidden;
+      width: 0px;
+      margin-right: 0;
     }
+  }
+  .text {
+    width: 43px;
+    transition: 300ms ease;
+    transition-property: width, margin;
+    overflow: hidden;
+  }
 }
 
-.pltrans-enter-to, .pltrans-leave {
-    transform: translateY(0);
-    opacity: 1;
+.pltrans-enter-to,
+.pltrans-leave {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .pltrans-enter {
-    transform: translateY(-100%);
-    opacity: 0;
+  transform: translateY(-100%);
+  opacity: 0;
 }
 
 .pltrans-leave-to {
-    transform: translateY(100%);
-    opacity: 0;
+  transform: translateY(100%);
+  opacity: 0;
 }
 
-.pltrans-enter-active, .pltrans-leave-active, .pltrans-move {
-    transition: all 600ms ease-out;
+.pltrans-enter-active,
+.pltrans-leave-active,
+.pltrans-move {
+  transition: all 600ms ease-out;
 }
 
 .pltrans-leave-active {
-    position: absolute;
+  position: absolute;
 }
 </style>
