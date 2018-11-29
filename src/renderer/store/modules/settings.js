@@ -3,7 +3,8 @@ export default {
         name: '',
         image: '',
         firstStart: true,
-        port: 8124
+        port: 8124,
+        useSubfolder: false
     },
     mutations: {
         'set-image' (state, payload) {

@@ -114,9 +114,14 @@ router.post('/identify', (req, res) => {
 })
 
 router.post('/request-file', (req, res) => {
+    console.log('Received file request from', req.ip)
+
     if (req.body) {
         const name = req.body.name
         const size = req.body.size
+
+        console.log('Request data [name=%s] [size=%s]', name, '' + size)
+
         if (
             typeof name === 'string' &&
             typeof size === 'number' &&
@@ -134,6 +139,8 @@ router.post('/request-file', (req, res) => {
             }
             store.dispatch('new-file', data)
 
+            console.log('Updated state and returning data id to requested user', data.id)
+
             return res.status(200).json({ id: data.id })
         }
     }
@@ -145,8 +152,11 @@ router.post('/request-file', (req, res) => {
 })
 
 router.post('/file-status', (req, res) => {
+    console.log('Requested file status change from', req.ip)
+
     if (req.body && req.body.id) {
         if (req.body.status === 'accepted') {
+            console.log('file status is accepted, upadting state accordingly, starting to upload file')
             store.dispatch('update-file', {
                 id: req.body.id,
                 data: {
@@ -161,6 +171,7 @@ router.post('/file-status', (req, res) => {
         }
 
         if (req.body.status === 'error' || req.body.status === 'rejected') {
+            console.log('file status is [%s], updating state accordingly', req.body.status)
             store.dispatch('update-file', {
                 id: req.body.id,
                 data: {
@@ -172,25 +183,19 @@ router.post('/file-status', (req, res) => {
 })
 
 router.post('/file-transfer/:id', async (req, res) => {
+    console.log('begin file transter request from %s with file id %s', req.ip, req.params.id)
+
     const id = req.params.id
     const file = store.getters.getFileById(id)
     if (!file) {
         return res.status(404).end()
     }
 
-    if (file.ip !== req.ip) {
+    if (file.ip !== req.ip || file.destination !== 'download' || file.status !== 'in-progress' || file.progress !== 0) {
         return res.status(403).end()
     }
 
     let downloadFolder = store.state.settings.downloadFolder
-
-    store.dispatch('update-file', {
-        id,
-        data: {
-            status: 'downloading',
-            progress: 0
-        }
-    })
 
     // Create subdirectory if needed
     if (store.settings.useSubfolder) {
@@ -206,8 +211,7 @@ router.post('/file-transfer/:id', async (req, res) => {
             store.dispatch('file-update', {
                 id,
                 data: {
-                    status: 'error',
-                    progress: 0
+                    status: 'error'
                 }
             })
             return res.status(500).end()
@@ -218,7 +222,9 @@ router.post('/file-transfer/:id', async (req, res) => {
     const writeStream = fs.createWriteStream(filePath)
     let bytesDownloaded = 0
 
-    writeStream.on('error', () => {
+    writeStream.on('error', (err) => {
+        console.error('[%s] error in write stream: ', id, err)
+
         fs.unlink(filePath)
         store.dispatch('update-file', {
             id,
@@ -239,6 +245,8 @@ router.post('/file-transfer/:id', async (req, res) => {
             })
             writeStream.destroy(new Error('File too large!'))
         }
+
+        console.log('[%s] downloaded bytes %s / %s', id, bytesDownloaded, file.size)
 
         const newProgress = Math.floor((file.size / bytesDownloaded) * 100)
         const bytesToSave = bytesDownloaded
@@ -261,11 +269,14 @@ router.post('/file-transfer/:id', async (req, res) => {
                 })
                 writeStream.end()
                 res.status(201).end()
+
+                console.log('[%s] finished downloading this file!', id)
             }
         })
     })
 
-    req.on('error', () => {
+    req.on('error', (err) => {
+        console.error('[%s] error in request stream: ', id, err)
         res.status(500).json({ message: 'Request stream error occurred!' })
         writeStream.destroy(new Error('Request stream error!'))
     })
