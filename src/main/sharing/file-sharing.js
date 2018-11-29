@@ -9,6 +9,7 @@ import uploadFile from './upload-with-progress'
 import { createServer } from 'http'
 // import { createSecureContext } from 'tls'
 import { ipcMain } from 'electron'
+import receive from './receiver'
 
 // console.log(createSecureContext)
 
@@ -203,76 +204,36 @@ router.post('/file-status', (req, res) => {
 
 router.post('/file-transfer/:id', async (req, res) => {
     console.log('begin file transter request from %s with file id %s', req.ip, req.params.id)
+    const file = store.getters.getFileById(req.params.id)
 
-    const id = req.params.id
-    const file = store.getters.getFileById(id)
-    if (!file) {
-        return res.status(404).end()
-    }
+    const receiver = receive(req, file)
 
-    if (file.ip !== req.ip || file.destination !== 'download' || file.status !== 'in-progress' || file.progress !== 0) {
-        return res.status(403).end()
-    }
-
-    const writeStream = fs.createWriteStream(file.path)
-    let bytesDownloaded = 0
-
-    writeStream.on('error', (err) => {
-        console.error('[%s] error in write stream: ', id, err)
-
-        fs.unlink(file.path)
+    receiver.on('error', () => {
+        res.status(500).end()
         store.dispatch('update-file', {
-            id,
+            id: file.id,
             data: {
                 status: 'error'
             }
         })
     })
 
-    req.on('data', data => {
-        // if the file size is too large
-        bytesDownloaded += data.length
-        if (bytesDownloaded > file.size) {
-            req.off('data')
-            res.status(500).json({
-                message:
-                    'File is too large, specified smaller size when requesting!'
-            })
-            writeStream.destroy(new Error('File too large!'))
-        }
-
-        console.log('[%s] downloaded bytes %s / %s', id, bytesDownloaded, file.size)
-
-        const newProgress = Math.floor((file.size / bytesDownloaded) * 100)
-        const bytesToSave = bytesDownloaded
-        writeStream.write(data, () => {
-            store.dispatch('update-file', {
-                id,
-                data: {
-                    progress: newProgress,
-                    bytesDownloaded: bytesToSave
-                }
-            })
-
-            if (bytesToSave === file.size) {
-                store.dispatch('update-file', {
-                    id,
-                    data: {
-                        progress: 100,
-                        status: 'completed'
-                    }
-                })
-                writeStream.end()
-                res.status(201).end()
-
-                console.log('[%s] finished downloading this file!', id)
+    receiver.on('progress', progress => [
+        store.dispatch('update-file', {
+            id: file.id,
+            data: {
+                progress: progress
             }
         })
-    })
+    ])
 
-    req.on('error', (err) => {
-        console.error('[%s] error in request stream: ', id, err)
-        res.status(500).json({ message: 'Request stream error occurred!' })
-        writeStream.destroy(new Error('Request stream error!'))
+    receiver.on('done', () => {
+        res.status(200).end()
+        store.dispatch('update-file', {
+            id: file.id,
+            data: {
+                status: 'completed'
+            }
+        })
     })
 })
