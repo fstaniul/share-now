@@ -186,7 +186,7 @@ router.post('/file-status', (req, res) => {
 
             res.status(201).end()
 
-            setTimeout(() => uploadFile(req.ip, req.body.id).catch(err => console.log(err)))
+            setTimeout(() => uploadFile(req.ip, req.body.id).catch(err => console.log(err)), 0)
         }
 
         if (req.body.status === 'error' || req.body.status === 'rejected') {
@@ -259,7 +259,7 @@ router.post('/file-transfer/:id', async (req, res) => {
                     id,
                     data: {
                         progress: 100,
-                        status: 'downloaded'
+                        status: 'completed'
                     }
                 })
                 writeStream.end()

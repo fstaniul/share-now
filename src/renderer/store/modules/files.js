@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import axios from 'axios'
-import path from 'path'
 
 export default {
     state: [

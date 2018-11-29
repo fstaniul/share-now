@@ -13,25 +13,20 @@ export default function uploadFile (ip, id) {
 
     const prom = new Deferred()
     const file = store.getters.getFileById(id)
-    const url = `http://${ip}:${store.state.settings.port}`
 
     if (!file) prom.reject(new Error(`File with id ${id} does not exist!`))
 
-    const req = http.request(`${url}/file-transfer/${id}`, {method: 'POST'})
-
-    req.on('error', (err) => {
-        console.error('Error in request stream: ', err)
-
-        store.dispatch('update-file', {
-            id,
-            data: {
-                status: 'error'
-            }
-        })
-        prom.reject(err)
-    })
-
-    req.on('response', res => {
+    const req = http.request({
+        protocol: 'http:',
+        host: file.ip,
+        port: store.state.settings.port,
+        method: 'POST',
+        path: `/file-transfer/${id}`,
+        headers: {
+            'Content-Type': 'application/octet-stream',
+            'Content-Length': file.size
+        }
+    }, res => {
         console.log('Got response back from client receiving with status:', res.statusCode)
         if (res.statusCode > 400) return prom.reject(new Error(`Returned status ${res.statusCode}`))
 
@@ -44,6 +39,20 @@ export default function uploadFile (ip, id) {
         })
 
         prom.resolve(res)
+    })
+
+    console.log('Created request!')
+
+    req.on('error', (err) => {
+        console.error('Error in request stream: ', err)
+
+        store.dispatch('update-file', {
+            id,
+            data: {
+                status: 'error'
+            }
+        })
+        prom.reject(err)
     })
 
     fs.open(file.path, 'r', (err, fd) => {
@@ -60,6 +69,8 @@ export default function uploadFile (ip, id) {
             prom.reject(err)
             return
         }
+
+        console.log('Openend file [%s]', file.path)
 
         const bsize = 1024 * 64
         let buffer = Buffer.alloc(bsize)
@@ -95,6 +106,8 @@ export default function uploadFile (ip, id) {
 
                 bytesRead += br
 
+                console.log('[%s] Read %s (%s)/ %s -> %s', file.id, br, bytesRead, file.size, file.ip)
+
                 if (br <= bsize) req.write(buffer.slice(0, br), continueReading)
                 else req.write(buffer, continueReading)
             })
@@ -103,5 +116,5 @@ export default function uploadFile (ip, id) {
         readChunk()
     })
 
-    return prom
+    return prom.promise
 }
