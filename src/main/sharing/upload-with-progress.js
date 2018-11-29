@@ -9,6 +9,8 @@ function sendStatusError (url, id) {
 }
 
 export default function uploadFile (ip, id) {
+    console.log('Uploading file with id [%s] to ip [%s]', id, ip)
+
     const prom = new Deferred()
     const file = store.getters.getFileById(id)
     const url = `http://${ip}:${store.state.settings.port}`
@@ -18,6 +20,8 @@ export default function uploadFile (ip, id) {
     const req = http.request(`${url}/file-transfer/${id}`, {method: 'POST'})
 
     req.on('error', (err) => {
+        console.error('Error in request stream: ', err)
+
         store.dispatch('update-file', {
             id,
             data: {
@@ -28,6 +32,7 @@ export default function uploadFile (ip, id) {
     })
 
     req.on('response', res => {
+        console.log('Got response back from client receiving with status:', res.statusCode)
         if (res.statusCode > 400) return prom.reject(new Error(`Returned status ${res.statusCode}`))
 
         store.dispatch('update-file', {
@@ -43,6 +48,8 @@ export default function uploadFile (ip, id) {
 
     fs.open(file.path, 'r', (err, fd) => {
         if (err) {
+            console.error('Error while opening file at path', file.path)
+
             sendStatusError()
             store.dispatch('update-file', {
                 id,

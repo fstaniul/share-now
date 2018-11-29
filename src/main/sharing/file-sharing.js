@@ -137,6 +137,25 @@ router.post('/request-file', (req, res) => {
                 status: 'requested',
                 progress: 0
             }
+
+            let downloadFolder = store.state.settings.downloadFolder
+
+            // Create subdirectory if needed
+            if (store.state.settings.useSubfolder) {
+                downloadFolder = path.join(downloadFolder, 'SHAREnow')
+            }
+
+            data.path = path.resolve(downloadFolder, name)
+
+            try {
+                mkdirp.sync(downloadFolder)
+            } catch (err) {
+                console.error('Failed to create folder for downloading of file [%s]: ', data.id, downloadFolder)
+                data.status = 'error'
+                store.dispatch('new-file', data)
+                return res.status(500).end()
+            }
+
             store.dispatch('new-file', data)
 
             console.log('Updated state and returning data id to requested user', data.id)
@@ -195,37 +214,13 @@ router.post('/file-transfer/:id', async (req, res) => {
         return res.status(403).end()
     }
 
-    let downloadFolder = store.state.settings.downloadFolder
-
-    // Create subdirectory if needed
-    if (store.settings.useSubfolder) {
-        try {
-            downloadFolder = path.join(downloadFolder, 'SHAREnow')
-            await new Promise((resolve, reject) => {
-                mkdirp(downloadFolder, err => {
-                    if (err) reject(err)
-                    else resolve()
-                })
-            })
-        } catch (err) {
-            store.dispatch('file-update', {
-                id,
-                data: {
-                    status: 'error'
-                }
-            })
-            return res.status(500).end()
-        }
-    }
-
-    const filePath = path.join(downloadFolder, file.name)
-    const writeStream = fs.createWriteStream(filePath)
+    const writeStream = fs.createWriteStream(file.path)
     let bytesDownloaded = 0
 
     writeStream.on('error', (err) => {
         console.error('[%s] error in write stream: ', id, err)
 
-        fs.unlink(filePath)
+        fs.unlink(file.path)
         store.dispatch('update-file', {
             id,
             data: {

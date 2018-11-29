@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
+import path from 'path'
 
 export default {
     state: [
@@ -44,11 +45,13 @@ export default {
         'update-file' ({ commit }, payload) {
             commit('update-file', payload)
         },
-        'new-file' ({ commit }, payload) {
-            commit('add-file', payload)
+        'new-file' ({ commit, rootState }, file) {
+            commit('add-file', { ...file })
         },
         'update-file-status' ({getters, commit, rootState}, {id, status}) {
             const file = getters.getFileById(id)
+
+            console.log(file)
 
             commit('update-file', {
                 id,
@@ -68,7 +71,7 @@ export default {
     },
     getters: {
         getFileById (state) {
-            return id => state.filter(f => f.id === id)
+            return id => state.find(f => f.id === id)
         },
         getFilesByUserIp (state) {
             return ip => state.filter(f => f.ip === ip)

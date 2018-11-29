@@ -1,10 +1,14 @@
+import {resolve} from 'path'
+import {homedir} from 'os'
+
 export default {
     state: {
         name: '',
         image: '',
         firstStart: true,
         port: 8124,
-        useSubfolder: false
+        useSubfolder: false,
+        downloadFolder: resolve(homedir(), 'downloads')
     },
     mutations: {
         'set-image' (state, payload) {

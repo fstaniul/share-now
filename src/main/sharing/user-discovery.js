@@ -21,6 +21,8 @@ function findUsers () {
                 .post(`http://${ip}:${store.state.settings.port}/identify`, {
                     name: store.state.settings.name,
                     image: store.state.settings.image
+                }, {
+                    timeout: 3000
                 })
                 .then(res => {
                     console.log(res.data.name)
