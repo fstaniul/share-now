@@ -39,6 +39,12 @@ export default {
         },
         'mark-notifications-as-seen' ({commit}) {
             commit('mark-notifications-as-seen')
+        },
+        'add-notification' ({commit}, payload) {
+            commit('add-notification', payload)
+        },
+        'alter-notification' ({commit}, payload) {
+            commit('alter-notification', payload)
         }
     },
     getters: {

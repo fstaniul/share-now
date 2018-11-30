@@ -66,6 +66,7 @@
     "mkdirp": "^0.5.1",
     "node-forge": "^0.7.6",
     "open": "0.0.5",
+    "pretty-bytes": "^5.1.0",
     "uuid": "^3.3.2",
     "vue": "^2.5.16",
     "vue-electron": "^1.0.6",

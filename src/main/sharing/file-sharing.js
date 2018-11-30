@@ -9,6 +9,7 @@ import { createServer } from 'http'
 // import { createSecureContext } from 'tls'
 import { ipcMain } from 'electron'
 import receive from './receiver'
+import * as prettyBytes from 'pretty-bytes'
 
 // console.log(createSecureContext)
 
@@ -138,6 +139,8 @@ router.post('/request-file', (req, res) => {
                 progress: 0
             }
 
+            const user = store.getters.getUserByIp(req.ip)
+
             let downloadFolder = store.state.settings.downloadFolder
 
             // Create subdirectory if needed
@@ -157,6 +160,7 @@ router.post('/request-file', (req, res) => {
             }
 
             store.dispatch('new-file', data)
+            store.dispatch('add-notification', {text: `${user.name} wants to send You ${name} (${prettyBytes(size)})`, route: `/user/${req.ip}`, icon: 'file-download'})
 
             console.log('Updated state and returning data id to requested user', data.id)
 

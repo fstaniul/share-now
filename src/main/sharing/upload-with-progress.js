@@ -30,12 +30,14 @@ export default function uploadFile (ip, id) {
     })
 
     uploader.on('done', () => {
+        const user = store.getters.getUserByIp(ip)
         store.dispatch('update-file', {
             id,
             data: {
                 status: 'completed'
             }
         })
+        store.dispatch('add-notification', {text: `Uploading of ${file.name} to ${user.name} completed!`, icon: 'file-upload', route: `/user/${user.ip}`})
         prom.resolve()
     })
 
