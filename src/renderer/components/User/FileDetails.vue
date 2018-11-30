@@ -7,6 +7,7 @@
       :icon="file.direction === 'download' ? 'file-download' : 'file-upload'"
     />
     <span class="text-black">{{ file.name }}</span>
+    <span class="text-grey-dark text-sm ml-3" v-if="file.status === 'requested' && file.direction === 'download'">({{ prettySize }})</span>
     <span class="ml-auto mr-3 text-grey-dark status-text">{{ statusText }}</span>
     <div v-if="file.status === 'requested' && file.direction === 'download'" class="accept-container text-grey-lightest absolute text-xl">
         <button class="btn btn-accept bg-green-dark border-green text-grey-lighter" @click="acceptFile()">
@@ -44,6 +45,7 @@
 <script>
 import * as open from 'open'
 import * as path from 'path'
+import * as prettyBytes from 'pretty-bytes'
 
 export default {
     props: ['file'],
@@ -60,6 +62,9 @@ export default {
             case 'error': return ''
             default: return this.file.status
             }
+        },
+        prettySize () {
+            return prettyBytes(this.file.size)
         }
     },
     methods: {
