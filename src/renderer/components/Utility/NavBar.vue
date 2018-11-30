@@ -2,9 +2,10 @@
   <nav class="text-2rem">
     <button
       type="button"
-      class="bell-btn mr-1 text-grey-darker hover:text-blue"
+      class="bell-btn mr-1 text-grey-darker hover:text-blue relative"
       @click="toggleNotifications()"
     >
+      <notification-counter />
       <fa-icon icon="bell"></fa-icon>
     </button>
     <button type="button" class="cog-btn text-grey-darker hover:text-blue" @click="gotoSettings()">
@@ -15,6 +16,9 @@
 
 <script>
 export default {
+    components: {
+        'notification-counter': require('./NavBar/NotificationCounter').default
+    },
     methods: {
         gotoSettings () {
             this.$router.push({ name: 'settings' })
